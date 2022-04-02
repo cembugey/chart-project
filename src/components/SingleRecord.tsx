@@ -61,6 +61,7 @@ const SingleRecord: React.FC<SingleRecordProps> = ({
                         border: `1px solid ${LIGHT_GREY}`
                     }}
                     value={x}
+                    min={0}
                     max={100}
                     onChange={(e) => handleEdit(e.target.value, id, "x")}
                 />
@@ -76,6 +77,7 @@ const SingleRecord: React.FC<SingleRecordProps> = ({
                         border: `1px solid ${LIGHT_GREY}`
                     }}
                     value={y}
+                    min={0}
                     max={100}
                     onChange={(e) => handleEdit(e.target.value, id, "y")}
                 />
