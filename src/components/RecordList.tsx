@@ -6,14 +6,14 @@ import SingleRecord from "./SingleRecord";
 
 interface RecordListProps {
     records: Record[];
-    handleEdit: (value: string | number, id: number, propert: string) => void;
+    handleEdit: (value: string | number | boolean, id: number, propert: string) => void;
     handleDelete: (id: number) => void;
 }
 
 const StyledGrid = styled.div`
     display: grid;
     width: 500px;
-    grid-template-columns: 40% 20% 20% 20%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
 `;
 
 const StyledBadge = styled.div`
@@ -35,6 +35,7 @@ const RecordList: React.FC<RecordListProps> = ({
     return (
         <StyledGrid>
             <StyledBadge>Label</StyledBadge>
+            <StyledBadge>Label</StyledBadge>
             <StyledBadge>Vision</StyledBadge>
             <StyledBadge>Ability</StyledBadge>
             <StyledBadge>Delete</StyledBadge>
@@ -43,6 +44,7 @@ const RecordList: React.FC<RecordListProps> = ({
                     <SingleRecord
                         key={record.id}
                         id={record.id}
+                        checked={record.checked}
                         label={record.label}
                         x={record.x}
                         y={record.y}

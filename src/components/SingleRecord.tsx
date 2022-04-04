@@ -18,16 +18,18 @@ const StyledButton = styled.button`
 
 interface SingleRecordProps {
     id: number;
+    checked: boolean;
     label: string;
     x: number;
     y: number;
-    handleEdit: (value: string | number, id: number, propert: string) => void;
+    handleEdit: (value: string | number | boolean, id: number, propert: string) => void;
     handleDelete: (id: number) => void;
 }
 
 const SingleRecord: React.FC<SingleRecordProps> = ({
     id,
     label,
+    checked,
     x,
     y,
     handleEdit,
@@ -35,6 +37,21 @@ const SingleRecord: React.FC<SingleRecordProps> = ({
 }) => {
     return (
         <>
+            <StyledDiv>
+                <input
+                    type="checkbox"
+                    // style={{
+                    //     width: "100%",
+                    //     paddingLeft: "6px",
+                    //     boxSizing: "border-box",
+                    //     borderRadius: "5px",
+                    //     border: `1px solid ${LIGHT_GREY}`
+                    // }}
+                    defaultChecked={checked}
+                    // maxLength={15}
+                    onChange={(e) => handleEdit(e.target.checked, id, "checked")}
+                />
+            </StyledDiv>
             <StyledDiv>
                 <input
                     type="text"

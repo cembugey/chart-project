@@ -12,12 +12,12 @@ import {
 const StyledPoint = styled.span`
     height: 16px;
     width: 16px;
-    background-color: ${DARK_BLUE};
     border-radius: 50%;
     display: inline-block;
     position: absolute;
     left: ${({ x }: Coordinate) => (x ? `${4 * x - 8}px` : `0px`)};
     bottom: ${({ y }: Coordinate) => (y ? `${4 * y - 8}px` : `0px`)};
+    background-color: ${({ checked }: Coordinate) => (checked ? "#696969" : "#696969AA")};
 `;
 
 const StyledPointLabel = styled.span`
@@ -124,6 +124,7 @@ interface ChartProps {
 interface Coordinate {
     x: number;
     y: number;
+    checked: boolean;
 }
 
 const Chart: React.FC<ChartProps> = ({ records, setRecords }) => {
@@ -194,6 +195,7 @@ const Chart: React.FC<ChartProps> = ({ records, setRecords }) => {
                         <StyledPoint
                             x={record.x}
                             y={record.y}
+                            checked={record.checked}
                             draggable
                             onDragStart={(e) => onDragStart(e, record)}
                         >

@@ -39,17 +39,26 @@ const App: React.FC = () => {
     const handleAdd = () => {
         const newRecords: Record[] = [
             ...records,
-            { id: Date.now(), label: "New", x: 50, y: 50 }
+            { id: Date.now(), checked: true, label: "New", x: 50, y: 50 }
         ];
         localStorage.setItem("records", JSON.stringify(newRecords));
         setRecords(newRecords);
     };
 
+    // const handleCheck = () => {
+        
+    //     localStorage.setItem("records", JSON.stringify(newRecords));
+    //     setRecords(newRecords);
+    // };
+
     const handleEdit = useCallback(
-        (value: string | number, id: number, property: string) => {
+        (value: string | number | boolean, id: number, property: string) => {
+            console.log("value: ", value);
             const newRecords: Record[] = records.map((record) =>
                 record.id === id ? { ...record, [property]: value } : record
             );
+            console.log("newRecords: ", newRecords);
+            
             localStorage.setItem("records", JSON.stringify(newRecords));
             setRecords(newRecords);
         },
