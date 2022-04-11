@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useRef, Fragment } from "react";
 import styled from "styled-components";
 import { Record } from "../utils/types";
 import {
@@ -17,7 +17,8 @@ const StyledPoint = styled.span`
     position: absolute;
     left: ${({ x }: Coordinate) => (x ? `${4 * x - 8}px` : `0px`)};
     bottom: ${({ y }: Coordinate) => (y ? `${4 * y - 8}px` : `0px`)};
-    background-color: ${({ checked }: Coordinate) => (checked ? "#696969" : "#696969AA")};
+    background-color: ${({ checked }: Coordinate) =>
+        checked ? `${DARK_BLUE}` : `${DARK_BLUE}AA`};
 `;
 
 const StyledPointLabel = styled.span`
@@ -46,6 +47,17 @@ const StyledInnerDiv = styled.div`
     float: left;
     text-align: center;
     padding: 16px;
+`;
+
+const StyledDashedDiv = styled.div`
+    display: none;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-right: 2px dashed red;
+    border-top: 2px dashed red;
 `;
 
 const StyledLabelX = styled.span`
@@ -128,8 +140,19 @@ interface Coordinate {
 }
 
 const Chart: React.FC<ChartProps> = ({ records, setRecords }) => {
+    const divRef = useRef<HTMLDivElement>(null);
+
     const onDragOver = (event: React.DragEvent<HTMLDivElement>): void => {
         event.preventDefault();
+        if (divRef && divRef.current) {
+            divRef.current.style.display = "block";
+            divRef.current.style.height = `${
+                divRef.current.getBoundingClientRect().bottom - event.clientY
+            }px`;
+            divRef.current.style.width = `${
+                event.clientX - divRef.current.getBoundingClientRect().left
+            }px`;
+        }
     };
 
     const onDragStart = (
@@ -160,6 +183,9 @@ const Chart: React.FC<ChartProps> = ({ records, setRecords }) => {
                   }
                 : record
         );
+        if (divRef && divRef.current) {
+            divRef.current.style.display = "none";
+        }
         localStorage.setItem("records", JSON.stringify(newRecords));
         setRecords(newRecords);
     };
@@ -181,6 +207,7 @@ const Chart: React.FC<ChartProps> = ({ records, setRecords }) => {
             <StyledInnerDiv>
                 <StyledBadgeBottom>Visionaries</StyledBadgeBottom>
             </StyledInnerDiv>
+            <StyledDashedDiv ref={divRef}></StyledDashedDiv>
             <StyledLabelY>
                 <StyledLabelTextY>Ability to execute</StyledLabelTextY>
                 <StyledArrow />

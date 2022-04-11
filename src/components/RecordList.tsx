@@ -13,7 +13,7 @@ interface RecordListProps {
 const StyledGrid = styled.div`
     display: grid;
     width: 500px;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 5% 35% 20% 20% 20%;
 `;
 
 const StyledBadge = styled.div`
@@ -23,7 +23,6 @@ const StyledBadge = styled.div`
     color: ${WHITE};
     font-family: sans-serif;
     margin: 2px;
-    padding: 2px 30px;
     border-radius: 5px;
 `;
 
@@ -34,7 +33,7 @@ const RecordList: React.FC<RecordListProps> = ({
 }) => {
     return (
         <StyledGrid>
-            <StyledBadge>Label</StyledBadge>
+            <StyledBadge></StyledBadge>
             <StyledBadge>Label</StyledBadge>
             <StyledBadge>Vision</StyledBadge>
             <StyledBadge>Ability</StyledBadge>

@@ -40,15 +40,10 @@ const SingleRecord: React.FC<SingleRecordProps> = ({
             <StyledDiv>
                 <input
                     type="checkbox"
-                    // style={{
-                    //     width: "100%",
-                    //     paddingLeft: "6px",
-                    //     boxSizing: "border-box",
-                    //     borderRadius: "5px",
-                    //     border: `1px solid ${LIGHT_GREY}`
-                    // }}
+                    style={{
+                        margin: "auto"
+                    }}
                     defaultChecked={checked}
-                    // maxLength={15}
                     onChange={(e) => handleEdit(e.target.checked, id, "checked")}
                 />
             </StyledDiv>

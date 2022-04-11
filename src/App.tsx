@@ -45,20 +45,11 @@ const App: React.FC = () => {
         setRecords(newRecords);
     };
 
-    // const handleCheck = () => {
-        
-    //     localStorage.setItem("records", JSON.stringify(newRecords));
-    //     setRecords(newRecords);
-    // };
-
     const handleEdit = useCallback(
         (value: string | number | boolean, id: number, property: string) => {
-            console.log("value: ", value);
             const newRecords: Record[] = records.map((record) =>
                 record.id === id ? { ...record, [property]: value } : record
             );
-            console.log("newRecords: ", newRecords);
-            
             localStorage.setItem("records", JSON.stringify(newRecords));
             setRecords(newRecords);
         },
